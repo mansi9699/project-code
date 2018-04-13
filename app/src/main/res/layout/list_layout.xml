@@ -21,8 +21,19 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:src="@drawable/default_image" />
+                android:layout_height="150dp" />
+
+            <com.github.silvestrpredko.dotprogressbar.DotProgressBar
+                android:id="@+id/dot_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_marginTop="100dp"
+                custom:amount="5"
+                custom:duration="@android:integer/config_mediumAnimTime"
+                custom:endColor="@color/light_blue_A400"
+                custom:startColor="@color/light_blue_A700"
+                custom:animationDirection="left"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
