@@ -34,6 +34,8 @@ public class Upcoming extends AppCompatActivity {
 
     private List<UpcomingList> listUpcoming;
 
+    private Context context = this;
+
     private String JSON_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/codechef/?cstatus=0&format=json";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +106,16 @@ public class Upcoming extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), startdate, Toast.LENGTH_SHORT).show();
                                 Toast.makeText(getApplicationContext(), enddate, Toast.LENGTH_SHORT).show();*/
 
-                                UpcomingList upcomingListObj = new UpcomingList(code, name, startdate, enddate, name);
+                                mostRelevantImage mri = new mostRelevantImage();
+                                String url = mri.findMostPerfectImage(code, name, startdate, enddate , context, i);
+
+                                if(url.isEmpty())
+                                {
+                                    url = "https://www.computerhope.com/jargon/e/error.gif";
+                                }
+
+
+                                UpcomingList upcomingListObj = new UpcomingList(code, name, startdate, enddate, url, name);
 
                                 listUpcoming.add(upcomingListObj);
                             }

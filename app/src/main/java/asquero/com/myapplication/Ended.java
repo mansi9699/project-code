@@ -35,6 +35,8 @@ public class Ended extends AppCompatActivity {
     private List<EndedList> listEnded;
     private String JSON_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/codechef/?cstatus=2&format=json";
 
+    private Context context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,20 +75,9 @@ public class Ended extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        //progressBar.setVisibility(View.INVISIBLE);
-
                         try {
 
-                            //JSONObject jsonObj = new JSONObject(response);
-
-                            //JSONArray jsonArray = new JSONArray(response);
-
-                            //if(jsonArray.length() <= 0)
-                            //{
-                            //Toast.makeText(getApplicationContext(), "before for", Toast.LENGTH_SHORT).show();
-                            //}
-
-                            for(int i = 0 ; i < response.length() ; i++) {
+                               for(int i = 0 ; i < 10 ; i++) {
 
                                 JSONObject endedJsonObj = response.getJSONObject(i);
 
@@ -104,7 +95,17 @@ public class Ended extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), startdate, Toast.LENGTH_SHORT).show();
                                 Toast.makeText(getApplicationContext(), enddate, Toast.LENGTH_SHORT).show();*/
 
-                                EndedList endedListObj = new EndedList(code, name, startdate, enddate, name);
+                                //String imageUrl = "https://edsurge.imgix.net/uploads/post/image/7747/Kids_coding-1456433921.jpg?auto=compress%2Cformat&w=2000&h=810&fit=crop";
+                                mostRelevantImage mri = new mostRelevantImage();
+                                String url = mri.findMostPerfectImage(code, name, startdate, enddate , context, i);
+
+                                if(url.isEmpty())
+                                {
+                                    url = "https://www.computerhope.com/jargon/e/error.gif";
+                                }
+
+
+                                EndedList endedListObj = new EndedList(code, name, startdate, enddate, url, name);
 
                                 listEnded.add(endedListObj);
                             }
@@ -140,12 +141,6 @@ public class Ended extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         requestQueue.add(jsonArrayRequest);
-
-        /*endedListAdapter = new EndedListAdapter(listEnded,Ended.this);
-        //progressBar.setVisibility(View.INVISIBLE);
-        recyclerView.setAdapter(endedListAdapter);*/
-
-
 
     }
 

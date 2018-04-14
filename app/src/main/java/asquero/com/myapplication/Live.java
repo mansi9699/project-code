@@ -1,18 +1,13 @@
 package asquero.com.myapplication;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -22,8 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-/*import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
-import com.github.silvestrpredko.dotprogressbar.DotProgressBarBuilder;*/
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -40,6 +33,8 @@ public class Live extends AppCompatActivity {
 
     private List<LiveList> listLive;
     private String JSON_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/codechef/?cstatus=1&format=json";
+
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +53,7 @@ public class Live extends AppCompatActivity {
 
         listLive = new ArrayList<>();
 
-        /*for (int i = 0; i< 20 ; i++){
-            LiveList liveLists = new LiveList("DummyCode"+i,"DummyName"+i,"0","0","DummyName"+i);
-            listLive.add(liveLists);
-        }*/
-
-        /*liveListAdapter = new LiveListAdapter(listLive,Live.this);
-        recyclerView.setAdapter(liveListAdapter);*/
         loadLiveData();
-
-        /*try {
-            Picasso.get().load("http://i.imgur.com/DvpvklR.png").placeholder(R.drawable.upcoming).error(R.drawable.ended).into((ImageView) findViewById(R.id.imageView));
-        }
-        catch (java.lang.RuntimeException e){
-            Toast.makeText(getApplicationContext(), "Picasso Failed", Toast.LENGTH_SHORT).show();
-        }*/
 
     }
 
@@ -88,18 +69,9 @@ public class Live extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        //progressBar.setVisibility(View.INVISIBLE);
 
                         try {
 
-                            //JSONObject jsonObj = new JSONObject(response);
-
-                            //JSONArray jsonArray = new JSONArray(response);
-
-                            //if(jsonArray.length() <= 0)
-                            //{
-                            //Toast.makeText(getApplicationContext(), "before for", Toast.LENGTH_SHORT).show();
-                            //}
 
                             for(int i = 0 ; i < response.length() ; i++) {
 
@@ -119,7 +91,16 @@ public class Live extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), startdate, Toast.LENGTH_SHORT).show();
                                 Toast.makeText(getApplicationContext(), enddate, Toast.LENGTH_SHORT).show();*/
 
-                                LiveList liveListObj = new LiveList(code, name, startdate, enddate, name);
+                                //String imageUrl = "https://edsurge.imgix.net/uploads/post/image/7747/Kids_coding-1456433921.jpg?auto=compress%2Cformat&w=2000&h=810&fit=crop";
+                                mostRelevantImage mri = new mostRelevantImage();
+                                String url = mri.findMostPerfectImage(code, name, startdate, enddate , context, i);
+
+                                if(url.isEmpty())
+                                {
+                                    url = "https://www.computerhope.com/jargon/e/error.gif";
+                                }
+
+                                LiveList liveListObj = new LiveList(code, name, startdate, enddate, url, name);
 
                                 listLive.add(liveListObj);
                             }
@@ -128,7 +109,6 @@ public class Live extends AppCompatActivity {
                             progressBar.setVisibility(View.INVISIBLE);
                             recyclerView.setAdapter(liveListAdapter);
 
-                            //Picasso.get().load("https://www.teachermagazine.com.au/files/ce-image/cache/1c03ffc10fd4ef6a/Computing-programming-and-coding-in-schools_855_513_48.jpg").into((ImageView) findViewById(R.id.imageView));
 
                         } catch (Exception e) {
 
@@ -156,11 +136,6 @@ public class Live extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         requestQueue.add(jsonArrayRequest);
-
-
-        /*liveListAdapter = new LiveListAdapter(listLive,Live.this);
-        //progressBar.setVisibility(View.INVISIBLE);
-        recyclerView.setAdapter(liveListAdapter);*/
 
     }
 

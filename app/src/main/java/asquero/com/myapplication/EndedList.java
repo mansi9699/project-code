@@ -10,13 +10,15 @@ class EndedList {
     private String startDate;
     private String endDate;
     //private int image;
+    private String imageUrl;
     private String AIC;
 
-    public EndedList(String contestCode, String contestName, String startDate, String endDate, String AIC) {
+    public EndedList(String contestCode, String contestName, String startDate, String endDate, String imageUrl, String AIC) {
         this.contestCode = contestCode;
         this.contestName = contestName;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.imageUrl = imageUrl;
         this.AIC = AIC;
     }
 
@@ -35,6 +37,8 @@ class EndedList {
     public String getEndDate() {
         return endDate;
     }
+
+    public String getImageUrl() { return imageUrl; }
 
     public String getAIC() {
         return AIC;

@@ -10,13 +10,15 @@ class UpcomingList {
     private String startDate;
     private String endDate;
     //private int image;
+    private String imageUrl;
     private String AIC;
 
-    public UpcomingList(String contestCode, String contestName, String startDate, String endDate, String AIC) {
+    public UpcomingList(String contestCode, String contestName, String startDate, String endDate, String imageUrl, String AIC) {
         this.contestCode = contestCode;
         this.contestName = contestName;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.imageUrl = imageUrl;
         this.AIC = AIC;
     }
 
@@ -35,6 +37,8 @@ class UpcomingList {
     public String getEndDate() {
         return endDate;
     }
+
+    public String getImageUrl() { return imageUrl; }
 
     public String getAIC() {
         return AIC;
