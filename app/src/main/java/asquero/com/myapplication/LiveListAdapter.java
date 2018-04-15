@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -56,17 +57,21 @@ public class LiveListAdapter extends RecyclerView.Adapter<LiveListAdapter.ViewHo
         holder.startDate.setText(""+(ce));
 
         holder.aic.setText(listItem.getAIC());
+        holder.progressBar.setVisibility(View.VISIBLE);
         //String url = "https://edsurge.imgix.net/uploads/post/image/7747/Kids_coding-1456433921.jpg?auto=compress%2Cformat&w=2000&h=810&fit=crop";
 
         try {
 
             Picasso.get().load(""+url).into(holder.imageView);
+            holder.progressBar.setVisibility(View.INVISIBLE);
         }
         catch (Exception e){
 
             e.printStackTrace();
             //Picasso.get().load(url).placeholder(R.drawable.upcoming).error(R.drawable.ended).into(holder.imageView);
+            holder.progressBar.setVisibility(View.INVISIBLE);
             holder.imageView.setImageResource(R.drawable.ended);
+
         }
 
     }
@@ -85,6 +90,7 @@ public class LiveListAdapter extends RecyclerView.Adapter<LiveListAdapter.ViewHo
         public TextView startDate;
         public ImageView imageView;
         public TextView aic;
+        public ProgressBar progressBar;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -94,9 +100,8 @@ public class LiveListAdapter extends RecyclerView.Adapter<LiveListAdapter.ViewHo
             startDate = (TextView)itemView.findViewById(R.id.endDateNum);
             //ImageView imagev = (ImageView)itemView.findViewById(R.id.imageView);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarImage);
             aic = (TextView)itemView.findViewById(R.id.AICTextView);
-
-
         }
     }
 }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -72,26 +73,28 @@ public class Upcoming extends AppCompatActivity {
     public void loadUpcomingData() {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        final TextView searchingdata = (TextView) findViewById(R.id.searchingData);
         progressBar.setVisibility(View.VISIBLE);
+        searchingdata.setVisibility(View.VISIBLE);
         int c = 0;
         //Codechef data request*************************************************************************************************
 
-        dataRequest(JSON_Codechef_URL, "codechef", c++, progressBar);
+        dataRequest(JSON_Codechef_URL, "codechef", c++, progressBar, searchingdata);
 
 
         //Spoj data request*****************************************************************************************************
 
-        dataRequest(JSON_Spoj_URL, "spoj", c++, progressBar);
+        dataRequest(JSON_Spoj_URL, "spoj", c++, progressBar, searchingdata);
 
         //Hackerrank data request***********************************************************************************************
 
-        dataRequest(JSON_Hackerrank_URL, "hackerrank", c++, progressBar);
+        dataRequest(JSON_Hackerrank_URL, "hackerrank", c++, progressBar, searchingdata);
 
         //progressBar.setVisibility(View.INVISIBLE);
 
     }
 
-    public void dataRequest(String JSON_URL, final String site, final int c, final ProgressBar progressBar) {
+    public void dataRequest(String JSON_URL, final String site, final int c, final ProgressBar progressBar, final TextView searchingData) {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null,
 
@@ -139,6 +142,7 @@ public class Upcoming extends AppCompatActivity {
                             Log.i("counter progressbar", ""+c);
                             if(c == 2) {
                                 progressBar.setVisibility(View.INVISIBLE);
+                                searchingData.setVisibility(View.INVISIBLE);
                             }
                             recyclerView.setAdapter(upcomingListAdapter);
 
