@@ -32,7 +32,9 @@ public class Live extends AppCompatActivity {
     private RecyclerView.Adapter liveListAdapter;
 
     private List<LiveList> listLive;
-    private String JSON_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/codechef/?cstatus=1&format=json";
+    private String JSON_Codechef_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/codechef/?cstatus=1&format=json";
+    private String JSON_Spoj_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/spoj/?cstatus=1&format=json";
+    private String JSON_Hackerrank_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/hackerrank/?cstatus=1&format=json";
 
     private Context context = this;
 
@@ -63,6 +65,25 @@ public class Live extends AppCompatActivity {
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
+        //Codechef data request*************************************************************************************************
+
+        dataRequest(JSON_Codechef_URL, "codechef");
+
+
+        //Spoj data request*****************************************************************************************************
+
+        dataRequest(JSON_Spoj_URL, "spoj");
+
+        //Hackerrank data request***********************************************************************************************
+
+        dataRequest(JSON_Hackerrank_URL, "hackerrank");
+
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void dataRequest(String JSON_URL, final String site){
+
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null,
 
                 new Response.Listener<JSONArray>() {
@@ -80,10 +101,10 @@ public class Live extends AppCompatActivity {
                                 /*Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
                                 Toast.makeText(getApplicationContext(), liveJsonObj.toString(), Toast.LENGTH_SHORT).show();*/
 
-                                String code = liveJsonObj.getString("ccode_codechef");
-                                String name = liveJsonObj.getString("cname_codechef");
-                                String startdate = liveJsonObj.getString("cstartdate_codechef");
-                                String enddate = liveJsonObj.getString("cenddate_codechef");
+                                String code = liveJsonObj.getString("ccode_"+site);
+                                String name = liveJsonObj.getString("cname_"+site);
+                                String startdate = liveJsonObj.getString("cstartdate_"+site);
+                                String enddate = liveJsonObj.getString("cenddate_"+site);
                                 //int status = liveJsonObj.getInt("codechef_cstatus");
 
                                 /*Toast.makeText(getApplicationContext(), code, Toast.LENGTH_SHORT).show();
@@ -106,7 +127,7 @@ public class Live extends AppCompatActivity {
                             }
 
                             liveListAdapter = new LiveListAdapter(listLive,Live.this);
-                            progressBar.setVisibility(View.INVISIBLE);
+                            //progressBar.setVisibility(View.INVISIBLE);
                             recyclerView.setAdapter(liveListAdapter);
 
 
@@ -133,9 +154,12 @@ public class Live extends AppCompatActivity {
                     }
                 });
 
+
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         requestQueue.add(jsonArrayRequest);
+
 
     }
 

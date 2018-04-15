@@ -33,7 +33,9 @@ public class Ended extends AppCompatActivity {
     private RecyclerView.Adapter endedListAdapter;
 
     private List<EndedList> listEnded;
-    private String JSON_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/codechef/?cstatus=2&format=json";
+    private String JSON_Codechef_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/codechef/?cstatus=2&format=json";
+    private String JSON_Spoj_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/spoj/?cstatus=2&format=json";
+    private String JSON_Hackerrank_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/hackerrank/?cstatus=2&format=json";
 
     private Context context = this;
 
@@ -64,10 +66,29 @@ public class Ended extends AppCompatActivity {
         loadEndedData();
     }
 
-    public void loadEndedData(){
+    public void loadEndedData() {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+
+        //Codechef data request*************************************************************************************************
+
+        dataRequest(JSON_Codechef_URL, "codechef");
+
+
+        //Spoj data request*****************************************************************************************************
+
+        dataRequest(JSON_Spoj_URL, "spoj");
+
+        //Hackerrank data request***********************************************************************************************
+
+        dataRequest(JSON_Hackerrank_URL, "hackerrank");
+
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void dataRequest(String JSON_URL, final String site) {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null,
 
@@ -75,20 +96,22 @@ public class Ended extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
 
+
                         try {
 
-                               for(int i = 0 ; i < 10 ; i++) {
+
+                            for (int i = 0; i < 5; i++) {
 
                                 JSONObject endedJsonObj = response.getJSONObject(i);
 
                                 /*Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(getApplicationContext(), endedJsonObj.toString(), Toast.LENGTH_SHORT).show();*/
+                                Toast.makeText(getApplicationContext(), liveJsonObj.toString(), Toast.LENGTH_SHORT).show();*/
 
-                                String code = endedJsonObj.getString("ccode_codechef");
-                                String name = endedJsonObj.getString("cname_codechef");
-                                String startdate = endedJsonObj.getString("cstartdate_codechef");
-                                String enddate = endedJsonObj.getString("cenddate_codechef");
-                                //int status = endedJsonObj.getInt("codechef_cstatus");
+                                String code = endedJsonObj.getString("ccode_" + site);
+                                String name = endedJsonObj.getString("cname_" + site);
+                                String startdate = endedJsonObj.getString("cstartdate_" + site);
+                                String enddate = endedJsonObj.getString("cenddate_" + site);
+                                //int status = liveJsonObj.getInt("codechef_cstatus");
 
                                 /*Toast.makeText(getApplicationContext(), code, Toast.LENGTH_SHORT).show();
                                 Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
@@ -97,21 +120,19 @@ public class Ended extends AppCompatActivity {
 
                                 //String imageUrl = "https://edsurge.imgix.net/uploads/post/image/7747/Kids_coding-1456433921.jpg?auto=compress%2Cformat&w=2000&h=810&fit=crop";
                                 mostRelevantImage mri = new mostRelevantImage();
-                                String url = mri.findMostPerfectImage(code, name, startdate, enddate , context, i);
+                                String url = mri.findMostPerfectImage(code, name, startdate, enddate, context, i);
 
-                                if(url.isEmpty())
-                                {
+                                if (url.isEmpty()) {
                                     url = "https://www.computerhope.com/jargon/e/error.gif";
                                 }
 
+                                EndedList upcomingListObj = new EndedList(code, name, startdate, enddate, url, name);
 
-                                EndedList endedListObj = new EndedList(code, name, startdate, enddate, url, name);
-
-                                listEnded.add(endedListObj);
+                                listEnded.add(upcomingListObj);
                             }
 
-                            endedListAdapter = new EndedListAdapter(listEnded,Ended.this);
-                            progressBar.setVisibility(View.INVISIBLE);
+                            endedListAdapter = new EndedListAdapter(listEnded, Ended.this);
+                            //progressBar.setVisibility(View.INVISIBLE);
                             recyclerView.setAdapter(endedListAdapter);
 
 
@@ -123,25 +144,24 @@ public class Ended extends AppCompatActivity {
                     }
                 },
 
-                new Response.ErrorListener(){
+                new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
-                        if(!networkConnectivity()){
+                        if (!networkConnectivity()) {
                             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         //Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
                     }
                 });
 
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         requestQueue.add(jsonArrayRequest);
-
     }
 
     public boolean networkConnectivity(){
