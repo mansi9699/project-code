@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,8 +43,13 @@ public class Ended extends AppCompatActivity {
 
     private Context context = this;
 
+    SwipeRefreshLayout mySwipeRefreshLayout;
+    TextView noInternetConnection;
+    ProgressBar progressBar;
+    TextView searchingdata;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ended);
 
@@ -57,6 +64,19 @@ public class Ended extends AppCompatActivity {
 
         listEnded = new ArrayList<>();
 
+        noInternetConnection = (TextView) findViewById(R.id.noInternetConnection);
+
+        if(!networkConnectivity()){
+
+            recyclerView.setVisibility(View.INVISIBLE);
+            noInternetConnection.setVisibility(View.VISIBLE);
+            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            loadEndedData(noInternetConnection);
+        }
+
         /*for (int i = 0; i< 20 ; i++){
             EndedList EndedLists = new EndedList("DummyCode"+i,"DummyName"+i,"0","0","DummyName"+i);
             listEnded.add(EndedLists);
@@ -65,15 +85,45 @@ public class Ended extends AppCompatActivity {
         endedListAdapter = new EndedListAdapter(listEnded,Ended.this);
         recyclerView.setAdapter(endedListAdapter);*/
 
-        loadEndedData();
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i("Swipe Refresh", "onRefresh called from SwipeRefreshLayout");
+
+                        recyclerView.setVisibility(View.INVISIBLE);
+                        if(!networkConnectivity()){
+
+                            noInternetConnection.setVisibility(View.VISIBLE);
+                            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            loadEndedData(noInternetConnection);
+                        }
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                mySwipeRefreshLayout.setRefreshing(false);
+                            }
+                        },3500);
+                    }
+                }
+        );
+
     }
 
-    public void loadEndedData() {
+    public void loadEndedData(TextView noInternetConnection) {
 
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        final TextView searchingdata = (TextView) findViewById(R.id.searchingData);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        searchingdata = (TextView) findViewById(R.id.searchingData);
+        noInternetConnection.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
         searchingdata.setVisibility(View.VISIBLE);
+
         int c = 0;
         //Codechef data request*************************************************************************************************
 
@@ -139,9 +189,11 @@ public class Ended extends AppCompatActivity {
 
                             Log.i("counter progressbar", ""+c);
                             if(c == 2) {
+
                                 progressBar.setVisibility(View.INVISIBLE);
                                 searchingData.setVisibility(View.INVISIBLE);
                             }
+                            recyclerView.setVisibility(View.VISIBLE);
                             recyclerView.setAdapter(endedListAdapter);
 
 
@@ -159,7 +211,11 @@ public class Ended extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
                         if (!networkConnectivity()) {
-                            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+                            progressBar.setVisibility(View.INVISIBLE);
+                            searchingData.setVisibility(View.INVISIBLE);
+                            noInternetConnection.setVisibility(View.VISIBLE);
+                            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }

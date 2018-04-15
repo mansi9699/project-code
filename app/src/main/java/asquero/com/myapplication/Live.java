@@ -3,13 +3,14 @@ package asquero.com.myapplication;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,9 +40,13 @@ public class Live extends AppCompatActivity {
     private String JSON_Hackerrank_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/hackerrank/?cstatus=1&format=json";
 
     private Context context = this;
+    SwipeRefreshLayout mySwipeRefreshLayout;
+    TextView noInternetConnection;
+    ProgressBar progressBar;
+    TextView searchingdata;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
 
@@ -58,37 +62,80 @@ public class Live extends AppCompatActivity {
 
         listLive = new ArrayList<>();
 
-        loadLiveData();
+        noInternetConnection = (TextView) findViewById(R.id.noInternetConnection);
+
+        if(!networkConnectivity()){
+
+            recyclerView.setVisibility(View.INVISIBLE);
+            noInternetConnection.setVisibility(View.VISIBLE);
+            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            loadLiveData(noInternetConnection);
+        }
+
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i("Swipe Refresh", "onRefresh called from SwipeRefreshLayout");
+
+                        recyclerView.setVisibility(View.INVISIBLE);
+                        if(!networkConnectivity()){
+
+                            noInternetConnection.setVisibility(View.VISIBLE);
+                            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            loadLiveData(noInternetConnection);
+                        }
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                mySwipeRefreshLayout.setRefreshing(false);
+                            }
+                        },3000);
+                    }
+                }
+        );
+
 
     }
 
 
-    public void loadLiveData(){
+    public void loadLiveData(TextView noInternetConnection){
 
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        final TextView searchingdata = (TextView) findViewById(R.id.searchingData);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        searchingdata = (TextView) findViewById(R.id.searchingData);
+        noInternetConnection.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
         searchingdata.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
         int c = 0;
 
         //Codechef data request*************************************************************************************************
 
-        dataRequest(JSON_Codechef_URL, "codechef", c++, progressBar, searchingdata);
+        dataRequest(JSON_Codechef_URL, "codechef", c++, progressBar, searchingdata, noInternetConnection);
 
 
         //Spoj data request*****************************************************************************************************
 
-        dataRequest(JSON_Spoj_URL, "spoj", c++, progressBar, searchingdata);
+        dataRequest(JSON_Spoj_URL, "spoj", c++, progressBar, searchingdata, noInternetConnection);
 
         //Hackerrank data request***********************************************************************************************
 
-        dataRequest(JSON_Hackerrank_URL, "hackerrank", c++, progressBar, searchingdata);
+        dataRequest(JSON_Hackerrank_URL, "hackerrank", c++, progressBar, searchingdata, noInternetConnection);
 
         //progressBar.setVisibility(View.INVISIBLE);
 
     }
 
-    public void dataRequest(String JSON_URL, final String site, final int c, final ProgressBar progressBar, final TextView searchingData){
+    public void dataRequest(String JSON_URL, final String site, final int c, final ProgressBar progressBar, final TextView searchingData, final TextView noInternetConnection){
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null,
 
@@ -139,7 +186,9 @@ public class Live extends AppCompatActivity {
                                 progressBar.setVisibility(View.INVISIBLE);
                                 searchingData.setVisibility(View.INVISIBLE);
                             }
+                            recyclerView.setVisibility(View.VISIBLE);
                             recyclerView.setAdapter(liveListAdapter);
+
 
 
 
@@ -157,7 +206,11 @@ public class Live extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
                         if(!networkConnectivity()){
-                            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+                            progressBar.setVisibility(View.INVISIBLE);
+                            searchingData.setVisibility(View.INVISIBLE);
+                            noInternetConnection.setVisibility(View.VISIBLE);
+                            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -184,19 +237,4 @@ public class Live extends AppCompatActivity {
 
     }
 
-    /*public void doProgressBar(){
-
-        dotProgressBar.setStartColor(startColor);
-        dotProgressBar.setEndColor(endColor);
-        dotProgressBar.setDotAmount(amount);
-        dotProgressBar.setAnimationTime(time);
-
-// or you can use builder
-
-        DotProgressBarBuilder dpbb = new DotProgressBarBuilder(findViewById(R.list_layout.dot_progress_bar))
-                .setDotAmount(5)
-                .setStartColor(Color.BLACK)
-                .setAnimationDirection(DotProgressBar.LEFT_DIRECTION)
-                .build();
-    }*/
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,14 +38,19 @@ public class Upcoming extends AppCompatActivity {
 
     private List<UpcomingList> listUpcoming;
 
-    private Context context = this;
-
     private String JSON_Codechef_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/codechef/?cstatus=0&format=json";
     private String JSON_Spoj_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/spoj/?cstatus=0&format=json";
     private String JSON_Hackerrank_URL = "http://codersdiary-env.jrpma4ezhw.us-east-2.elasticbeanstalk.com/hackerrank/?cstatus=0&format=json";
 
+    private Context context = this;
+
+    SwipeRefreshLayout mySwipeRefreshLayout;
+    TextView noInternetConnection;
+    ProgressBar progressBar;
+    TextView searchingdata;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming);
 
@@ -58,6 +65,19 @@ public class Upcoming extends AppCompatActivity {
 
         listUpcoming = new ArrayList<>();
 
+        noInternetConnection = (TextView) findViewById(R.id.noInternetConnection);
+
+        if(!networkConnectivity()){
+
+            recyclerView.setVisibility(View.INVISIBLE);
+            noInternetConnection.setVisibility(View.VISIBLE);
+            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            loadUpcomingData(noInternetConnection);
+        }
+
         /*for (int i = 0; i< 20 ; i++){
             UpcomingList upcomingLists = new UpcomingList("DummyCode"+i,"DummyName"+i,"0","0","DummyName"+i);
             listUpcoming.add(upcomingLists);
@@ -66,14 +86,43 @@ public class Upcoming extends AppCompatActivity {
         upcomingListAdapter = new UpcomingListAdapter(listUpcoming,Upcoming.this);
         recyclerView.setAdapter(upcomingListAdapter);*/
 
-        loadUpcomingData();
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i("Swipe Refresh", "onRefresh called from SwipeRefreshLayout");
+
+                        recyclerView.setVisibility(View.INVISIBLE);
+                        if(!networkConnectivity()){
+
+                            noInternetConnection.setVisibility(View.VISIBLE);
+                            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            loadUpcomingData(noInternetConnection);
+                        }
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                mySwipeRefreshLayout.setRefreshing(false);
+                            }
+                        },3500);
+                    }
+                }
+        );
+
     }
 
 
-    public void loadUpcomingData() {
+    public void loadUpcomingData(TextView noInternetConnection) {
 
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        final TextView searchingdata = (TextView) findViewById(R.id.searchingData);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        searchingdata = (TextView) findViewById(R.id.searchingData);
+        noInternetConnection.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
         searchingdata.setVisibility(View.VISIBLE);
         int c = 0;
@@ -144,6 +193,7 @@ public class Upcoming extends AppCompatActivity {
                                 progressBar.setVisibility(View.INVISIBLE);
                                 searchingData.setVisibility(View.INVISIBLE);
                             }
+                            recyclerView.setVisibility(View.VISIBLE);
                             recyclerView.setAdapter(upcomingListAdapter);
 
 
@@ -161,7 +211,11 @@ public class Upcoming extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
                         if (!networkConnectivity()) {
-                            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+                            progressBar.setVisibility(View.INVISIBLE);
+                            searchingData.setVisibility(View.INVISIBLE);
+                            noInternetConnection.setVisibility(View.VISIBLE);
+                            //Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
