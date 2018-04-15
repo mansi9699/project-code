@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -64,25 +65,26 @@ public class Live extends AppCompatActivity {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+        int c = 0;
 
         //Codechef data request*************************************************************************************************
 
-        dataRequest(JSON_Codechef_URL, "codechef");
+        dataRequest(JSON_Codechef_URL, "codechef", c++, progressBar);
 
 
         //Spoj data request*****************************************************************************************************
 
-        dataRequest(JSON_Spoj_URL, "spoj");
+        dataRequest(JSON_Spoj_URL, "spoj", c++, progressBar);
 
         //Hackerrank data request***********************************************************************************************
 
-        dataRequest(JSON_Hackerrank_URL, "hackerrank");
+        dataRequest(JSON_Hackerrank_URL, "hackerrank", c++, progressBar);
 
-        progressBar.setVisibility(View.INVISIBLE);
+        //progressBar.setVisibility(View.INVISIBLE);
 
     }
 
-    public void dataRequest(String JSON_URL, final String site){
+    public void dataRequest(String JSON_URL, final String site, final int c, final ProgressBar progressBar){
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null,
 
@@ -127,8 +129,14 @@ public class Live extends AppCompatActivity {
                             }
 
                             liveListAdapter = new LiveListAdapter(listLive,Live.this);
-                            //progressBar.setVisibility(View.INVISIBLE);
+
+                            Log.i("counter progressbar", ""+c);
+                            if(c == 2) {
+                                progressBar.setVisibility(View.INVISIBLE);
+
+                            }
                             recyclerView.setAdapter(liveListAdapter);
+
 
 
                         } catch (Exception e) {
