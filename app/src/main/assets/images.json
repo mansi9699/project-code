@@ -1,343 +1,68 @@
 {
   "imagesJson": [
-    {
-      "Url": "https://www.text100.com/wp-content/uploads/2015/04/codingfeatured.jpg",
-      "Source": "TEXT100",
-      "Keywords": [
-        "coding",
-        "digital marketers"
-      ]
+    {"Url" : "https://thumb9.shutterstock.com/display_pic_with_logo/1355392/577183882/stock-photo-software-developer-programming-code-abstract-computer-script-code-programming-code-screen-of-577183882.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["software developer","programming code","computer script code","code screen","software developer","code text"]
     },
-    {
-      "Url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Backlit_keyboard.jpg/640px-Backlit_keyboard.jpg?uselang=en-gb",
-      "Source": "THE TELEGRAPH",
-      "Keywords": [
-        "Fundamentals of coding",
-        "who needs code"
-      ]
+    {"Url" : "https://thumb1.shutterstock.com/display_pic_with_logo/1355392/632918576/stock-photo-software-developer-programming-code-abstract-computer-script-code-programming-code-screen-of-632918576.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["program","code","code screen","signs","symbols","flag","event"]
     },
-    {
-      "Url": "https://www.bgosoftware.com/blog/wp-content/uploads/2016/03/insidepost_coding.jpg",
-      "Source": "BGO SOFTWARE",
-      "Keywords": [
-        "Addicted to codimg",
-        "brain wired",
-        "curious way of coding"
-      ]
+    {"Url" : "https://thumb7.shutterstock.com/display_pic_with_logo/3092849/606046391/stock-vector-vector-streaming-binary-code-background-data-and-technology-decryption-and-encryption-computer-606046391.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" :  ["1","0","code","binary","decrypt","encrypt","vector","complex"]
     },
-    {
-      "Url": "https://think360studio.com/wp-content/uploads/2017/12/Learn-coding-online.jpeg",
-      "Source": "THINK 360",
-      "Keywords": [
-        "Learn to code",
-        "Learn",
-        "CodeAcademy",
-        "Free Code Camp",
-        "Coursera",
-        "general assembly",
-        "udemy",
-        "udacity"
-      ]
+    {"Url" : "https://thumb1.shutterstock.com/display_pic_with_logo/1784291/535124956/stock-photo-programming-code-abstract-technology-background-of-software-developer-and-computer-script-535124956.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["programming","virtual","internet","data","screen","code"]
     },
-    {
-      "Url": "http://www.gettingsmart.com/wp-content/uploads/2017/06/Program-Code-Feature-Image.jpg",
-      "Source": "GETTING SMART",
-      "Keywords": [
-        "cause to code",
-        "data resources"
-      ]
+    {"Url" : "https://thumb7.shutterstock.com/display_pic_with_logo/3673289/421269664/stock-vector-code-icon-in-trendy-flat-style-isolated-on-grey-background-code-symbol-for-your-web-site-design-421269664.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["html","website","web","design","code icon","website development"]
     },
-    {
-      "Url": "http://kellerelementary.weebly.com/uploads/2/5/7/9/25792133/coding.jpg",
-      "Source": "WEEBLY",
-      "Keywords": [
-        "Program",
-        "Programming",
-        "Coding",
-        "Algorithms"
-      ]
+    {"Url" : "https://thumb9.shutterstock.com/display_pic_with_logo/3252050/740523562/stock-vector-abstract-futuristic-cyberspace-with-binary-code-matrix-background-with-digits-well-organized-740523562.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["green","dark","futuristic","cyber space","matrix","well orgnanized layers","illustration","binary code","code","technology"]
     },
-    {
-      "Url": "http://kellerelementary.weebly.com/uploads/2/5/7/9/25792133/coding.png",
-      "Source": "WEEBLY",
-      "Keywords": [
-        "coding everything",
-        "C hash",
-        "microsoft",
-        "google",
-        "coding"
-      ]
+    {"Url" : "https://thumb7.shutterstock.com/display_pic_with_logo/273481/613463807/stock-photo-developing-programming-and-coding-technologies-website-design-cyber-space-concept-613463807.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["develop","programming","coding tehnologies","team","programming","thinking","work","screen"]
     },
-    {
-      "Url": "http://summercamps.erau.edu/Assets/summercamps/images/camps/non-flight/computer-coding-camp.jpg",
-      "Source": "SUMMER CAMPS",
-      "Keywords": [
-        "computer coding camp",
-        "coding camp"
-      ]
+    {"Url" : "https://thumb1.shutterstock.com/display_pic_with_logo/2117717/338631620/stock-photo-php-programming-html-coding-cyberspace-concept-338631620.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["php","html","coding","concepts","blue","css","tags"]
     },
-    {
-      "Url": "https://cdn-images-1.medium.com/max/2000/1*Eh3ftzvlQzIPk-nhaPedTQ.jpeg",
-      "Source": "CODE LIKE A GIRL",
-      "Keywords": [
-        "coding in real world",
-        "coding in college",
-        "writing code",
-        "code like a girl"
-      ]
+    {"Url" : "https://thumb7.shutterstock.com/display_pic_with_logo/2741491/578229397/stock-vector-laptop-vector-icon-578229397.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["click","code","computer","web","technology","software","graphic","graphic design"]
     },
-    {
-      "Url": "http://www.simplydigital.in/cms_image/22042016055812_simply.jpg",
-      "Source": "SIMPLY DIGITAL",
-      "Keywords": [
-        "coding for kids",
-        "learn programming",
-        "the digital ninja"
-      ]
+    {"Url" : "https://images.pexels.com/photos/6482/black-and-white-man-person-hands.jpg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "Source" : "PEXELS",
+      "Keywords" : ["coffee","relax","programming","begin","hobby"]
     },
-    {
-      "Url": "https://codakid.com/wp-content/uploads/2016/07/Best-Programming-Languages-For-Kids-2-1024x552.png",
-      "Source": "CODAKID",
-      "Keywords": [
-        "javascript",
-        "python",
-        "css",
-        "html",
-        "c++",
-        "php",
-        "arduino",
-        "ruby",
-        "perl"
-      ]
+    {"Url" : "https://images.pexels.com/photos/270404/pexels-photo-270404.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "Source" : "PEXELS",
+      "Keywords" : ["html","code","css","programmer","script","php","web dev","frontend","bootstrap","jquery"]
     },
-    {
-      "Url": "http://learningworksforkids.com/wp-content/uploads/code1.jpg",
-      "Source": "LEARNING WORKS FOR KIDS",
-      "Keywords": [
-        "khan academy",
-        "hours of code"
-      ]
+    {"Url" : "https://images.pexels.com/photos/7059/man-people-space-desk.jpg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "Source" : "PEXELS",
+      "Keywords" : ["work","workspace","desk","program","hard","pen","paper","write","training"]
     },
-    {
-      "Url": "https://img.qunba.com/df22fd415bf84d098507fc0a7efa9e29.png",
-      "Source": "ZAZHI",
-      "Keywords": [
-        "fear of coding",
-        "fear",
-        "freight"
-      ]
+    {"Url" : "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "Source" : "PEXELS",
+      "Keywords" : ["glasses","programming","work","continue","sprint"]
     },
-    {
-      "Url": "http://www.eweek.com/imagesvr_ez/b2bezp/2017/12/Java.code.JPG?alias=article_hero",
-      "Source": "E WEEK",
-      "Keywords": [
-        "coding developer",
-        "java"
-      ]
+    {"Url" : "https://images.pexels.com/photos/247932/pexels-photo-247932.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "Source" : "PIXABAY",
+      "Keywords" : ["robotics","robots","artificial intelligence","AI","complex"]
     },
-    {
-      "Url": "https://codingweek.org/img/national-coding-week-logo-light.png",
-      "Source": "CODING WEEK",
-      "Keywords": [
-        "coding week",
-        "national coding week"
-      ]
+    {"Url" : "https://images.pexels.com/photos/355988/pexels-photo-355988.jpeg?auto=compress&cs=tinysrgb&h=350",
+      "Source" : "PIXABAY",
+      "Keywords" : ["idea","technology","think","imagination","innovate","innovative","code think"]
     },
-    {
-      "Url": "https://hackerearth.global.ssl.fastly.net/static/hackerearth/images/logo/HE_logo.png",
-      "Source": "HACKEREARTH",
-      "Keywords": [
-        "hackerearth",
-        "hacker earth"
-      ]
-    },
-    {
-      "Url": "https://icpc.baylor.edu/img/welcome/cm2-logo-panel_joel_wo_lang.png",
-      "Source": "International Collegiate Programming Contest",
-      "Keywords": [
-        "acm-icpc",
-        "icpc foundation"
-      ]
-    },
-    {
-      "Url": "https://www.famouslogos.net/images/technology-logos/greentech-logo.jpg",
-      "Source": "GREENTECH",
-      "Keywords": [
-        "greentech"
-      ]
-    },
-    {
-      "Url": "https://www.itbusiness.ca/wp-content/uploads/2009/10/microsoft.png",
-      "Source": "itbusiness.ca",
-      "Keywords": [
-        "microsoft"
-      ]
-    },
-    {
-      "Url": "https://thelogocompany.net/wp-content/uploads/2016/10/main_tier9.jpg",
-      "Source": "THE LOGO COMPANY",
-      "Keywords": [
-        "tier 9 technologies"
-      ]
-    },
-    {
-      "Url": "https://cdn.dribbble.com/users/3652/screenshots/1175281/techsmartkids-logo.png",
-      "Source": "DRIBBBLE",
-      "Keywords": [
-        "tech smart kids"
-      ]
-    },
-    {
-      "Url": "http://simplecore.intel.com/newsroom/wp-content/uploads/sites/11/2014/03/Two-Intel-logos-1024x558.jpg",
-      "Source": "INTEL NEWSROOM",
-      "Keywords": [
-        "intel"
-      ]
-    },
-    {
-      "Url": "http://lenovo-smart.ru/wp-content/uploads/2015/06/Novy-j-logotip-Lenovo-000-1508x706_c.jpg",
-      "Source": "LENOVO",
-      "Keywords": [
-        "lenovo"
-      ]
-    },
-    {
-      "Url": "https://amp.businessinsider.com/images/539f3ffbecad044276726c01-750-273.jpg",
-      "Source": "AMAZON",
-      "Keywords": [
-        "amazon",
-        "amazon.in"
-      ]
-    },
-    {
-      "Url": "https://theultralinx.com/.image/t_share/MTMyODg0MjkzMTI2MDM0NzA2/googlepng.png",
-      "Source": "ULTRALINX",
-      "Keywords": [
-        "google"
-      ]
-    },
-    {
-      "Url": "https://www.youthcorners.com/wp-content/uploads/2018/03/cf.png",
-      "Source": "YOUTHCORNERS",
-      "Keywords": [
-        "code forces",
-        "codeforces",
-        "code-forces"
-      ]
-    },
-    {
-      "Url": "https://cdn.vox-cdn.com/thumbor/1U_KTWeLU158vxvKO0gbClUimSg=/16x0:884x488/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/25302489/screen_shot_2013-12-17_at_11.59.50_am.0.png",
-      "Source": "POLYGON",
-      "Keywords": [
-        "code wars",
-        "codewars",
-        "codeWars"
-      ]
-    },
-    {
-      "Url": "http://infocreeds.com/wp-content/uploads/2016/04/top-10-coding-challanges-website-codewars.jpg",
-      "Source": "INFOCREEDS",
-      "Keywords": [
-        "infocreeds"
-      ]
-    },
-    {
-      "Url": "https://www.codechef.com/sites/all/themes/abessive/logo.png",
-      "Source": "CODECHEF",
-      "Keywords": [
-        "codechef"
-      ]
-    },
-    {
-      "Url": "https://pbs.twimg.com/profile_images/707979145045614594/Hidlx62E_400x400.jpg",
-      "Source": "TWITTER",
-      "Keywords": [
-        "top coder",
-        "topcoder"
-      ]
-    },
-    {
-      "Url": "https://blog.linkedin.com/etc/designs/linkedin/katy/global/clientlibs/img/default-share.png",
-      "Source": "LINKEDIN",
-      "Keywords": [
-        "linkedin",
-        "linkedIn"
-      ]
-    },
-    {
-      "Url": "https://www.modeloff.com/wp-content/uploads/2017/11/hackerrank.png",
-      "Source": "MODELOFF",
-      "Keywords": [
-        "hackerrank"
-      ]
-    },
-    {
-      "Url": "https://edsurge.imgix.net/uploads/package/image/28/2015-03-30-coding-1427694216-1428727726-1428728903-1428743005.jpg?auto=compress%2Cformat&w=2000&h=810&fit=crop",
-      "Source": "EDSURGE",
-      "Keywords": [
-        "learn to code",
-        "kids"
-      ]
-    },
-    {
-      "Url": "https://amp.businessinsider.com/images/56816c2be6183ebe4a8b4d8f-750-563.jpg",
-      "Source": "BUSINESS INSIDER",
-      "Keywords": [
-        "web programming",
-        "programming language",
-        "beginner"
-      ]
-    },
-    {
-      "Url": "https://careerfoundry.com/en/blog/learn-to-code-get-hired-practice-min-17b62bb4646c36d8e9c625da3e43644939a23ffb46ad67227c98b1d4a32bb92f.jpg",
-      "Source": "CAREER FOUNDRY",
-      "Keywords": [
-        "web development",
-        "html"
-      ]
-    },
-    {
-      "Url": "https://media.wired.com/photos/5926fd5faf95806129f5148d/master/w_1600,c_limit/AI_2-1-1.jpg",
-      "Source": "WIRED",
-      "Keywords": [
-        "end of code",
-        "train computer",
-        "code"
-      ]
-    },
-    {
-      "Url": "https://media.mnn.com/assets/images/2014/10/bcds-ben.jpg.653x0_q80_crop-smart.jpg",
-      "Source": "MOTHER NATURE NETWORK",
-      "Keywords": [
-        "computer",
-        "curriculum",
-        "computer coding"
-      ]
-    },
-    {
-      "Url": "https://s3.amazonaws.com/viking_education/web_development/prep_basics/programming_cloud_small.jpg",
-      "Source": "VIKING CODE SCHOOL",
-      "Keywords": [
-        "programming",
-        "operating systems"
-      ]
-    },
-    {
-      "Url": "https://cdn.theatlantic.com/static/mt/assets/science/SomersCode-Post.jpg",
-      "Source": "THE ATLANTIC",
-      "Keywords": [
-        "encode",
-        "hacking"
-      ]
-    },
-    {
-      "Url": "https://images3.alphacoders.com/853/thumb-1920-85329.jpg",
-      "Source": "ALPHA CODERS",
-      "Keywords": [
-        "hacker",
-        "manifest",
-        "alpha coder"
-      ]
+    {"Url" : "https://thumb9.shutterstock.com/display_pic_with_logo/655432/465653942/stock-photo-businessman-shaking-digital-partners-hand-on-blue-background-465653942.jpg",
+      "Source" : "SHUTTERSTOCK",
+      "Keywords" : ["digital market","business","partner","handshake","robots","artificial","future"]
     }
   ]
 }

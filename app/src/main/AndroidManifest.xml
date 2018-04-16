@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="asquero.com.myapplication"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="asquero.com.myapplication">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,12 +9,13 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        tools:replace = "android:label"
-        android:label="Coder's Dairy"
+        android:label="Coder&apos;s Diary"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".welcomeActivity"
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
+        <activity
+            android:name=".welcomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,14 +23,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".Live"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".Upcoming"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".Ended"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".Live"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Upcoming"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Ended"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".content_main"
+            android:label="@string/title_activity_content_main"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

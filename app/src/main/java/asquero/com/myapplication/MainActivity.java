@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Switch;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,10 +98,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 listEvent.add(listItem);
             }
         }
-
         eventListAdapter = new EventListAdapter(listEvent,this);
         recyclerView.setAdapter(eventListAdapter);
+        setupDrawerContent(navigationView);
 
+    }
+    public void selectItemDrawer(MenuItem menuItem){
+        Fragment myFragment = null;
+        Class fragmentClass;
+        switch (menuItem.getItemId()){
+            case R.id.home:
+                fragmentClass = Home.class;
+                break;
+            case R.id.setting:
+                fragmentClass = Setting.class;
+                break;
+            case R.id.about:
+                fragmentClass = About.class;
+                break;
+            default:
+                fragmentClass = Home.class;
+        }
+        try {
+            myFragment = (Fragment) fragmentClass.newInstance();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_main,myFragment).commit();
+        menuItem.setChecked(true);
+        setTitle(menuItem.getTitle());
+        mDrawer.closeDrawers();
+    }
+    private void setupDrawerContent (NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                selectItemDrawer(item);
+                return true;
+            }
+        });
     }
 
     @Override
